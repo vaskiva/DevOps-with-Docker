@@ -1,0 +1,25 @@
+version: '3.8'
+
+services: 
+  frontend: 
+    image: example-frontend:1.14.0
+    ports: 
+      - 5000:5000
+    networks:
+      - hyrule
+  backend:
+    image: example-backend:1.14.1
+    ports: 
+      - 8080:8080
+    environment: 
+      - REDIS_HOST=redis
+      - REQUEST_ORIGIN=http://localhost:5000
+    networks:
+      - hyrule
+  redis:   
+    image: redis
+    networks:
+      - hyrule
+
+networks:
+  hyrule:
