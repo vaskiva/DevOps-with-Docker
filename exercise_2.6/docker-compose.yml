@@ -1,0 +1,37 @@
+version: '3.8'
+
+services: 
+  frontend: 
+    image: example-frontend:1.14.0
+    ports: 
+      - 5000:5000
+    networks:
+      - hyrule
+  backend:
+    image: example-backend:1.14.1
+    depends_on:
+      - db
+    ports: 
+      - 8080:8080
+    environment: 
+      - REDIS_HOST=redis
+      - REQUEST_ORIGIN=http://localhost:5000
+      - POSTGRES_HOST=db
+      - POSTGRES_PASSWORD=kewl
+    networks:
+      - hyrule
+  redis:   
+    image: redis
+    networks:
+      - hyrule
+  db:
+    image: postgres:16.3
+    restart: unless-stopped
+    # set shared memory limit when using docker-compose
+    shm_size: 128mb
+    environment:
+      POSTGRES_PASSWORD: kewl
+    networks: 
+      - hyrule  
+networks:
+  hyrule:
