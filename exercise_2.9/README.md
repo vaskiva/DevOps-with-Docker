@@ -9,7 +9,9 @@ Changes to docker-compose.yml
 Changes to backend.Dockerfile
 
 - changed the REQUEST_ORIGIN to http://frontend
+- removed the published port (EXPOSE 8080)
 
 Changes to frontend.Dockerfile
 
 - changed the REACT_APP_BACKEND_URL to http://nginx/api/ping (so it goes through the proxy, not directly to the backend)
+- removed the published port (EXPOSE 5000/tcp)

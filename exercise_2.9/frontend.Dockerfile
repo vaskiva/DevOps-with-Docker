@@ -5,7 +5,7 @@ WORKDIR /usr/src/app
 
 COPY frontend .
 
-EXPOSE 5000/tcp
+#EXPOSE 5000/tcp
 
 RUN npm install
 
