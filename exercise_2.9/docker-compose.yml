@@ -1,0 +1,60 @@
+version: '3.8'
+
+services: 
+  frontend: 
+    build: 
+      context: .
+      dockerfile: frontend.Dockerfile
+    networks:
+      - hyrule
+  redis:   
+    image: redis
+    networks:
+      - hyrule
+  db:
+    image: postgres:16.3
+    restart: unless-stopped
+    # set shared memory limit when using docker-compose
+    shm_size: 128mb
+    environment:
+      POSTGRES_PASSWORD: kewl
+    networks: 
+      - hyrule  
+    volumes:
+      - ./database:/var/lib/postgresql/data 
+  backend:
+    build: 
+      context: .
+      dockerfile: backend.Dockerfile
+    depends_on:
+      - db
+    environment: 
+      - REDIS_HOST=redis
+      - POSTGRES_HOST=db
+      - POSTGRES_PASSWORD=kewl
+    healthcheck:
+        test: ["CMD", "curl", "-f", "http://db"]
+        interval: 10s
+        timeout: 3s
+        retries: 20
+    networks:
+      - hyrule
+  nginx:
+    image: nginx:1.25.5
+    depends_on:
+      - backend
+      - frontend
+    networks:
+      - hyrule
+    ports:
+      - 80:80  
+    volumes:
+      - ./nginx.config:/etc/nginx/nginx.conf
+    healthcheck:
+        test: ["CMD", "curl", "-f", "http://backend:8080/ping"]
+        interval: 10s
+        timeout: 3s
+        retries: 20
+
+networks:
+  hyrule:

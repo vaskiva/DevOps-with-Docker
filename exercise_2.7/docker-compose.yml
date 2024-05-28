@@ -34,6 +34,6 @@ services:
     networks: 
       - hyrule  
     volumes:
-      - ./database:/var/lib/postgresql/data  
+      - ./database:/var/lib/postgresql/data
 networks:
   hyrule:
