@@ -4,6 +4,8 @@ on:
   push:
     branches:
       - main
+    paths:
+      - "exercise_3.1/express-app"
 
 jobs:
   buildAndPush:
