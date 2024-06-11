@@ -19,8 +19,8 @@ services:
       - WATCHTOWER_POLL_INTERVAL=30 
       - WATCHTOWER_LABEL_ENABLE=true
       - WATCHTOWER_DEBUG=true 
-     
-
+      - REPO_USER=vaskivaara 
+      - REPO_PASS=dckr_pat_5OQENqEeW8g8zkGrONzFdaD2Zog
     container_name: watchtower
  
     
