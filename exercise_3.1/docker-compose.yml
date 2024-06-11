@@ -2,10 +2,7 @@ version: '3.8'
 
 services: 
   express-app: 
-  #  build:
-  #    context: express-app
-  #    dockerfile: Dockerfile
-    image: vaskivaara/exercise3_1:0.1.0 
+    image: vaskivaara/exercise3_1:latest
     ports: 
       - 8000:8080  
     labels:
@@ -17,9 +14,7 @@ services:
     environment:
       - WATCHTOWER_POLL_INTERVAL=30 
       - WATCHTOWER_LABEL_ENABLE=true
-      - WATCHTOWER_TRACE=true 
-      - REPO_USER=vaskivaara 
-      - REPO_PASS=dckr_pat_5OQENqEeW8g8zkGrONzFdaD2Zog
+      - WATCHTOWER_DEBUG=true 
     container_name: watchtower
   
     
