@@ -1,0 +1,26 @@
+version: '3.8'
+
+services: 
+  express-app: 
+  #  build:
+  #    context: express-app
+  #    dockerfile: Dockerfile
+    image: vaskivaara/exercise3_1:0.1.0 
+    ports: 
+      - 8000:8080  
+    labels:
+      - "com.centurylinklabs.watchtower.enable=true"  
+  watchtower:
+    image: containrrr/watchtower
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./config.json:/config.json 
+    environment:
+      - WATCHTOWER_POLL_INTERVAL=30 
+      - WATCHTOWER_LABEL_ENABLE=true
+      - WATCHTOWER_DEBUG=true 
+      - REPO_USER=vaskivaara 
+      - REPO_PASS=dckr_pat_5OQENqEeW8g8zkGrONzFdaD2Zog
+    container_name: watchtower
+ 
+    
