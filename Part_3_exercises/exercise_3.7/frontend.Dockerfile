@@ -1,5 +1,5 @@
 #Matching Node version 16
-FROM node:16.20.2-buster
+FROM node:16.20.2-alpine3.18
 
 WORKDIR /usr/src/app
 
@@ -10,7 +10,7 @@ EXPOSE 5000/tcp
 RUN npm install && \
     npm run build && \
     npm install -g serve && \
-    useradd -m appuser && \
+    adduser -H -D appuser && \
     chown appuser . && \
     rm package-lock.json package.json README.md .dockerignore .gitignore
 

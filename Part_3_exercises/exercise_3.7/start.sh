@@ -1,2 +1,2 @@
-docker build -t backend_3.6 --file backend.Dockerfile .
-docker build -t frontend_3.6 --file frontend.Dockerfile .
+docker build -t backend_3.7 --file backend.Dockerfile .
+docker build -t frontend_3.7 --file frontend.Dockerfile .
